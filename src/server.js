@@ -15,14 +15,11 @@ const handleListen = () =>
 
 // http server
 const server = http.createServer(app);
-
 // webSocket server on http server
 const wss = new WebSocketServer({ server });
 
-function handleConnection(socket) {
-  console.log(socket);
-}
-
-wss.on('connection', handleConnection);
+wss.on('connection', (socket) => {
+  socket.send('hello!!!');
+});
 
 server.listen(3000, handleListen);
