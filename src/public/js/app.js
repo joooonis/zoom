@@ -11,3 +11,7 @@ socket.addEventListener('message', (message) => {
 socket.addEventListener('close', () => {
   console.log('close connection ❌');
 });
+
+setTimeout(() => {
+  socket.send('hello from the browser!');
+}, 2000);

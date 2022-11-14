@@ -19,6 +19,14 @@ const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
 
 wss.on('connection', (socket) => {
+  console.log('connection established!! ✨');
+
+  // add EventListeners
+  socket.on('close', () => console.log('close connection ❌'));
+  socket.on('message', (message) => {
+    console.log(message.toString('utf8'));
+  });
+
   socket.send('hello!!!');
 });
 
