@@ -22,6 +22,7 @@ const sockets = [];
 
 wss.on('connection', (socket) => {
   sockets.push(socket);
+  socket['nickname'] = 'Anonymous';
   console.log('connection established!! ✨');
 
   // add EventListeners
@@ -30,9 +31,11 @@ wss.on('connection', (socket) => {
     const parsed = JSON.parse(message);
     switch (parsed.type) {
       case 'new_message':
-        sockets.forEach((aSocket) => aSocket.send(parsed.payload));
+        sockets.forEach((aSocket) =>
+          aSocket.send(`${socket.nickname} : ${parsed.payload}`)
+        );
       case 'nickname':
-        console.log(parsed.payload);
+        socket['nickname'] = parsed.payload;
     }
   });
 });
