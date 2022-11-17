@@ -27,7 +27,13 @@ wss.on('connection', (socket) => {
   // add EventListeners
   socket.on('close', () => console.log('close connection ❌'));
   socket.on('message', (message) => {
-    sockets.forEach((aSocket) => aSocket.send(message.toString('utf-8')));
+    const parsed = JSON.parse(message);
+    switch (parsed.type) {
+      case 'new_message':
+        sockets.forEach((aSocket) => aSocket.send(parsed.payload));
+      case 'nickname':
+        console.log(parsed.payload);
+    }
   });
 });
 
