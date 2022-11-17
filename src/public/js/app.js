@@ -7,7 +7,7 @@ socket.addEventListener('open', () => {
 });
 
 socket.addEventListener('message', (message) => {
-  console.log(message.data);
+  console.log('✉️: ', message.data);
 });
 
 socket.addEventListener('close', () => {
