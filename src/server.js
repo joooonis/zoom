@@ -14,7 +14,12 @@ app.get('/', (req, res) => res.render('home'));
 app.get('/*', (req, res) => res.redirect('/'));
 
 io.on('connection', (socket) => {
-  console.log(socket);
+  socket.on('enter_room', (msg, done) => {
+    console.log(msg);
+    setTimeout(() => {
+      done();
+    }, 5000);
+  });
 });
 
 server.listen(3000, () => console.log(`Listening on http://localhost:3000`));
