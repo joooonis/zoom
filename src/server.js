@@ -14,11 +14,12 @@ app.get('/', (req, res) => res.render('home'));
 app.get('/*', (req, res) => res.redirect('/'));
 
 io.on('connection', (socket) => {
+  socket.onAny((event) => {
+    console.log(`Socket Event: ${event}`);
+  });
   socket.on('enter_room', (roomName, done) => {
-    console.log(roomName);
-    setTimeout(() => {
-      done('hello from the backend!');
-    }, 5000);
+    socket.join(roomName);
+    done();
   });
 });
 
