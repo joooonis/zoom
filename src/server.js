@@ -14,10 +14,10 @@ app.get('/', (req, res) => res.render('home'));
 app.get('/*', (req, res) => res.redirect('/'));
 
 io.on('connection', (socket) => {
-  socket.on('enter_room', (msg, done) => {
-    console.log(msg);
+  socket.on('enter_room', (roomName, done) => {
+    console.log(roomName);
     setTimeout(() => {
-      done();
+      done('hello from the backend!');
     }, 5000);
   });
 });
